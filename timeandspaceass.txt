@@ -1,0 +1,136 @@
+Question 1. Analyze the time complexity of the following Java code and suggest a way to improve it:
+int sum = 0;
+for(int i = 1; i <= n; i++) {
+for(int j = 1; j <= i; j++) {
+sum++;
+}
+}
+Ans:-The time complexity of the given Java code is O(n^2), where n is the value of the variable n. This is because the outer loop iterates from 1 to n, and the inner loop iterates from 1 to i, which is the current value of the outer loop variable. Therefore, the inner loop iterates a total of 1 + 2 + 3 + ... + n times, which is equal to n(n+1)/2, which is O(n^2) in the worst case.
+int n = 10; 
+int sum = n * (n + 1);
+System.out.println("The sum of the first " + n + " natural numbers is: " + sum);
+Question 2: Find the value of T(2) for the recurrence relation T(n) = 3T(n-1) + 12n, given that T(0) = 5.
+Ans:-To find the value of T(2), we need to apply the recurrence relation step by step, starting from T(0).
+
+Given: T(0) = 5
+
+First, calculate T(1): T(1) = 3T(1-1) + 121 T(1) = 3T(0) + 121 T(1) = 3*5 + 12 T(1) = 15 + 12 T(1) = 27
+
+Next, calculate T(2): T(2) = 3T(2-1) + 122 T(2) = 3T(1) + 24 T(2) = 327 + 24 T(2) = 81 + 24 T(2) = 105
+
+Therefore, T(2) for the recurrence relation T(n) = 3T(n-1) + 12n, given that T(0) = 5 is 105.
+Question 3: Given a recurrence relation, solve it using a substitution method.
+Relation : T(n) = T(n - 1) + c
+ANs:-To solve the recurrence relation T(n) = T(n - 1) + c with a substitution method, we first notice that this is an arithmetic sequence. The solution to such recurrence relations can be found using the direct method, but let's use the substitution method to illustrate the process.
+
+We will guess the solution has the form: T(n) = an + b
+
+where a and b are constants we need to determine.
+
+Now, let's prove our guess by induction.
+
+Base case: n = 0 or 1 (depending on the problem definition) T(0) = a0 + b = b T(1) = a1 + b = a + b
+
+We are given T(0) = b, so b is known. However, we cannot determine a from this information alone. We need another piece of information, such as T(1), to solve for both a and b.
+
+Inductive step: Assume the formula holds for n = k: T(k) = ak + b
+
+Now, let's prove it holds for n = k+1: T(k+1) = T((k+1) - 1) + c T(k+1) = T(k) + c T(k+1) = ak + b + c (using the induction assumption)
+
+To satisfy the recurrence relation, we need to show that T(k+1) has the form an+c, so we should be able to extract an and b from ak+b+c:
+
+an+c = ak + b + c
+
+Comparing the terms, we see that: a = 1 b = 0 c = c
+
+So, the solution to the recurrence relation T(n) = T(n - 1) + c is: T(n) = n + c, where c is a constant.
+Question 4: Given a recurrence relation:
+T(n) = 16T(n/4) + n2logn
+ANs:-To solve the recurrence relation T(n) = 16T(n/4) + n^2logn, we can use the Master Theorem. The Master Theorem states that for a recurrence relation of the form:
+
+T(n) = aT(n/b) + f(n)
+
+where a ≥ 1, b > 1 are constants, and f(n) is an asymptotically positive function, we can directly find the solution in terms of big-O notation.
+
+In our case: a = 16 b = 4
+
+First, let's find the value of logb(a):
+
+log4(16) = 4log4(2) = 4 * 0.5 = 2
+
+Now, let's consider the function f(n):
+
+f(n) = n^2logn
+
+Since f(n) = Θ(n^2logn), we have:
+
+d = 2 (the degree of the polynomial in f(n))
+
+Now, let's compare d and logb(a):
+
+d = 2 > 2 = logb(a)
+
+Since d > logb(a), and f(n) = Θ(n^dlogn), the Master Theorem states that:
+
+T(n) = Θ(n^d * log^p(n)) for some constant p ≥ 0
+
+In our case, since d = 2 and f(n) = n^2logn, we have:
+
+T(n) = Θ(n^2 * log^2(n))
+Find the time complexity of this relation using the master theorem.
+Question 5: Solve the following recurrence relation using recursion tree method T(n) = 2T(n/2) + n
+Ans:-           T(n)
+          /    \
+     T(n/2)      T(n/2)
+    /   \        /   \
+T(n/4) T(n/4) T(n/4) T(n/4)
+...
+At the i-th level, we have 2^i nodes, and the cost at each node is n/(2^i). The height of the tree is h = log2(n).
+
+Now, let's calculate the total cost at each level and sum them up:
+
+Level 0: T(n) Level 1: 2 * (n/2) Level 2: 2^2 * (n/2^2) ... Level h: 2^h * (n/2^h)
+
+Summing up the costs:
+
+T(n) = n + 2 * (n/2) + 2^2 * (n/2^2) + ... + 2^h * (n/2^h)
+
+This is an arithmetic series with a common ratio of 2. We can simplify the sum using the formula for the sum of a geometric series:
+
+T(n) = n * (1 + 2 + 2^2 + ... + 2^(h-1)) T(n) = n * (2^h - 1)
+
+Since h = log2(n), we have:
+
+T(n) = n * (n - 1)
+
+Using the big-O notation, we can simplify the expression:
+
+T(n) = Θ(n^2)
+Question 6. T(n) = 2T(n/2) + K, Solve using Recurrence tree method.
+Ans:-           T(n)
+          /    \
+     T(n/2)      T(n/2)
+    /   \        /   \
+T(n/4) T(n/4) T(n/4) T(n/4)
+...
+At the i-th level, we have 2^i nodes, and the cost at each node is K. The height of the tree is h = log2(n).
+
+Now, let's calculate the total cost at each level and sum them up:
+
+Level 0: K Level 1: 2 * K Level 2: 2^2 * K ... Level h: 2^h * K
+
+Summing up the costs:
+
+T(n) = K + 2 * K + 2^2 * K +... + 2^h * K
+
+This is an arithmetic series with a common ratio of 2. We can simplify the sum using the formula for the sum of a geometric series:
+
+T(n) = K * (2^h - 1)
+
+Since h = log2(n), we have:
+
+T(n) = K * (n - 1)
+
+Using the big-O notation, we can simplify the expression:
+
+T(n) = Θ(n)
